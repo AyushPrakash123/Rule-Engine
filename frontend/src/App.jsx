@@ -21,7 +21,7 @@ function App() {
         throw new Error(' Invalid rule format. Expected format: "field operator value"');
       }
 
-      const response = await axios.post('http://localhost:5000/create_rule', { rule });
+      const response = await axios.post('https://rule-engine-opal.vercel.app/create_rule', { rule });
       setRules([...rules, response.data.ast]);
       setError('');
     } catch (err) {
@@ -34,7 +34,7 @@ function App() {
       if (rules.length < 2) {
         throw new Error(' At least two rules are required to combine');
       }
-      const response = await axios.post('http://localhost:5000/combine_rules', { rules });
+      const response = await axios.post('https://rule-engine-opal.vercel.app/combine_rules', { rules });
       setCombinedAst(response.data.ast);
       setError('');
     } catch (err) {
@@ -47,7 +47,7 @@ function App() {
       if (!combinedAst || !data || typeof JSON.parse(data) !== 'object') {
         throw new Error(' Invalid rule or data');
       }
-      const response = await axios.post('http://localhost:5000/evaluate_rule', { ast: combinedAst, data: JSON.parse(data) });
+      const response = await axios.post('https://rule-engine-opal.vercel.app/evaluate_rule', { ast: combinedAst, data: JSON.parse(data) });
       setResult(response.data.result);
       setError('');
     } catch (err) {
