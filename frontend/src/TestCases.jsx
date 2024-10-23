@@ -43,7 +43,7 @@ function TestCases() {
     const results = [];
     for (const testCase of testCases) {
       try {
-        const response = await axios.post(`http://localhost:5000${testCase.endpoint}`, testCase.request);
+        const response = await axios.post(`https://rule-engine-8vi2.onrender.com${testCase.endpoint}`, testCase.request);
         results.push({ description: testCase.description, result: JSON.stringify(response.data, null, 2) });
       } catch (err) {
         results.push({ description: testCase.description, result: err.response.data.error });
